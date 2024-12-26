@@ -9,11 +9,9 @@ public class WordReader extends AReader {
    * Constructor for the WordReader class.
    *
    * @throws IllegalArgumentException if the text is empty or null
-   * @param text the text to be read
    */
-  public WordReader(String text) {
-    super(text);
-    this.parseText();
+  public WordReader() {
+    super();
   }
 
   @Override
@@ -30,6 +28,6 @@ public class WordReader extends AReader {
       this.chunks.add(word);
     }
 
-    this.currentChunk = this.chunks.remove(0);
+    this.currentChunk = this.chunks.get(0);
   }
 }

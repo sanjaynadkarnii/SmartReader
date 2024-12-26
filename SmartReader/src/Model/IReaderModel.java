@@ -22,8 +22,30 @@ public interface IReaderModel extends ReadOnlyReaderModel {
    */
   void nextChunk();
 
+  /**
+   * Updates the current chunk to the previous chunk.
+   *
+   * @throws IllegalStateException if the chunks have not been initialized
+   */
+  void previousChunk();
+
+  /**
+   * Adds an observer to the list of observers.
+   * @param observer the observer to add
+   */
   void addObserver(ModelObserver observer);
 
+  /**
+   * Removes an observer from the list of observers.
+   * @param observer the observer to remove
+   */
   void removeObserver(ModelObserver observer);
+
+  /**
+   * Adds text to the reader model.
+   *
+   * @param text the text to add
+   */
+  void addText(String text);
 
 }

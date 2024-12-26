@@ -25,11 +25,19 @@ public class ReaderController implements IReaderController {
     model.addObserver((Observer.ModelObserver) view);
   }
 
-  public void handleMouseClick() {
+  public void handleNextClick() {
     if (model.hasNextChunk()) {
       model.nextChunk(); // Updates the model, which notifies the view
     } else {
       JOptionPane.showMessageDialog(null, "No more chunks to display!");
     }
+  }
+
+  public void handlePreviousClick() {
+    if (model.hasPreviousChunk()) {
+      model.previousChunk(); // Updates the model, which notifies the view
+    } else {
+      JOptionPane.showMessageDialog(null, "No more chunks to display!");
+    } // Updates the model, which notifies the view
   }
 }

@@ -1,16 +1,17 @@
 package Model;
 
+/**
+ * Sentence-by-sentence reader model.
+ */
 public class SentenceReader extends AReader {
 
     /**
-    * Constructor for the SentenceReader class.
-    *
-    * @throws IllegalArgumentException if the text is empty or null
-    * @param text the text to be read
-    */
-    public SentenceReader(String text) {
-      super(text);
-      this.parseText();
+     * Constructor for the SentenceReader class.
+     *
+     * @throws IllegalArgumentException if the text is empty or null
+     */
+    public SentenceReader() {
+      super();
     }
 
   @Override
@@ -30,7 +31,7 @@ public class SentenceReader extends AReader {
 
     // Initialize the first chunk
     if (!this.chunks.isEmpty()) {
-      this.currentChunk = this.chunks.remove(0);
+      this.currentChunk = this.chunks.get(0);
     }
   }
 }

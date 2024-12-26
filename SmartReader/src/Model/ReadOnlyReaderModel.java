@@ -22,10 +22,18 @@ public interface ReadOnlyReaderModel {
   boolean hasNextChunk();
 
   /**
+   * Returns whether there are previous chunks to read.
+   *
+   * @throws IllegalStateException if chunks have not been initialized
+   * @return whether there are previous chunks to read
+   */
+  boolean hasPreviousChunk();
+
+  /**
    * Returns the number of remaining chunks.
    *
    * @throws IllegalStateException if chunks have not been initialized
    * @return the number of remaining chunks
    */
-  int getChunkCount();
+  int chunksLeft();
 }

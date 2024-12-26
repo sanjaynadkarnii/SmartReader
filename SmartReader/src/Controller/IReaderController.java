@@ -6,7 +6,12 @@ package Controller;
 public interface IReaderController {
 
   /**
-   * Handles the mouse click event.
+   * Handles an event where a button indicating next chunk is clicked.
    */
-  void handleMouseClick();
+  void handleNextClick();
+
+  /**
+   * Handles an event where a button indicating previous chunk is clicked.
+   */
+  void handlePreviousClick();
 }
