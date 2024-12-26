@@ -1,7 +1,12 @@
 package View;
 
-/**
- * Visual representation of the reader.
- */
+import Controller.IReaderController;
+
 public interface IReaderView {
+
+  String toString();
+
+  void display();
+
+  void setController(IReaderController controller);
 }

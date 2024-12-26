@@ -1,5 +1,7 @@
 package Model;
 
+import Observer.ModelObserver;
+
 /**
  * Contains the mutable methods for the reader model.
  */
@@ -19,4 +21,9 @@ public interface IReaderModel extends ReadOnlyReaderModel {
    * @throws IllegalStateException if the chunks have not been initialized
    */
   void nextChunk();
+
+  void addObserver(ModelObserver observer);
+
+  void removeObserver(ModelObserver observer);
+
 }

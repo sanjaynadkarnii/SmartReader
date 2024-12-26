@@ -1,67 +1,65 @@
 package Model;
 
-import java.util.List;
-import java.util.ArrayList;
+import Observer.ModelObserver;
 
-/**
- * Implements the common methods for the reader model.
- */
+import java.util.ArrayList;
+import java.util.List;
+
 public abstract class AReader implements IReaderModel {
-  protected String text; // Accessible to subclasses
+  protected String text;
   protected String currentChunk;
   protected List<String> chunks;
+  private List<ModelObserver> observers; // List of observers
 
-  /**
-   * Constructor for the AReader class.
-   *
-   * @throws IllegalArgumentException if the text is empty or null
-   * @param text the text to be read
-   */
   public AReader(String text) {
-    if (text == null) {
-      throw new IllegalArgumentException("Text cannot be null.");
-    }
-    if (text.equals("")) {
-      throw new IllegalArgumentException("Text cannot be empty.");
+    if (text == null || text.isEmpty()) {
+      throw new IllegalArgumentException("Text cannot be null or empty");
     }
 
     this.text = text;
     this.chunks = new ArrayList<>();
     this.currentChunk = "";
+    this.observers = new ArrayList<>();
   }
 
   @Override
   public abstract void parseText();
 
+  @Override
   public void nextChunk() {
-    if (chunks == null) {
-      throw new IllegalStateException("Chunks have not been initialized.");
+    if (!hasNextChunk()) {
+      throw new IllegalStateException("No more chunks to read");
     }
-    if (!this.hasNextChunk()) {
-      throw new IllegalStateException("No more chunks to read.");
-    }
-
-    this.currentChunk = this.chunks.remove(0);
+    this.currentChunk = chunks.remove(0);
+    notifyObservers(); // Notify observers of the state change
   }
 
+  @Override
   public boolean hasNextChunk() {
-    if (chunks == null) {
-      throw new IllegalStateException("Chunks have not been initialized.");
-    }
-    return !this.chunks.isEmpty();
-  }
-
-  public String getCurrentChunk() {
-    if (this.currentChunk == null || this.currentChunk.equals("")) {
-      throw new IllegalStateException("No chunk is currently being read.");
-    }
-    return this.currentChunk;
+    return !chunks.isEmpty();
   }
 
   public int getChunkCount() {
-    if (chunks == null) {
-      throw new IllegalStateException("Chunks have not been initialized.");
+    return chunks.size();
+  }
+
+  @Override
+  public String getCurrentChunk() {
+    return this.currentChunk;
+  }
+
+  // Observer methods
+  public void addObserver(ModelObserver observer) {
+    this.observers.add(observer);
+  }
+
+  public void removeObserver(ModelObserver observer) {
+    this.observers.remove(observer);
+  }
+
+  private void notifyObservers() {
+    for (ModelObserver observer : observers) {
+      observer.update();
     }
-    return this.chunks.size();
   }
 }
