@@ -10,7 +10,6 @@ import View.IReaderView;
  */
 public class ReaderController implements IReaderController {
   private IReaderModel model;
-  private IReaderView view;
 
   /**
    * Constructor for the controller.
@@ -19,7 +18,6 @@ public class ReaderController implements IReaderController {
    */
   public ReaderController(IReaderModel model, IReaderView view) {
     this.model = model;
-    this.view = view;
 
     // Register the view as an observer of the model
     model.addObserver((Observer.ModelObserver) view);

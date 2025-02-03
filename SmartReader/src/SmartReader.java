@@ -15,8 +15,8 @@ public class SmartReader {
     IReaderModel model2 = new SentenceReader();
     model1.addText(s);
     model2.addText(s);
-    NormalReaderView view = new NormalReaderView(model2);
-    IReaderController controller = new ReaderController(model2, view);
+    NormalReaderView view = new NormalReaderView(model1);
+    IReaderController controller = new ReaderController(model1, view);
 
     view.setController(controller);
     view.display();
